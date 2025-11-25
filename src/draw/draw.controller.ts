@@ -1,17 +1,23 @@
-import { Controller, Post, Body, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query, Param } from '@nestjs/common';
 import { DrawService } from './draw.service';
+import { EncryptionService } from 'src/encryption/encryption.service';
 
 @Controller('draw')
 export class DrawController {
-  constructor(private readonly drawService: DrawService) {}
+  constructor(
+    private readonly drawService: DrawService,
+    private encryptionService: EncryptionService,
+  ) {}
 
   @Post('generate')
   generateAll() {
     return this.drawService.generateAll();
   }
 
-  @Get()
-  getMyMatch(@Query('name') name: string) {
+  @Get(':token')
+  async draw(@Param('token') token: string) {
+    const name = this.encryptionService.decrypt(token);
+
     return this.drawService.getMyMatch(name);
   }
 
