@@ -4,7 +4,7 @@ Be leggero e funzionale con 3 endpoint per getList delle persone, creazione acco
 
 # Start
 
-npm i
+npm install
 npm start dev
 
 # per aprire la porta per il fe
@@ -12,3 +12,6 @@ npm start dev
 brew install cloudflare/cloudflare/cloudflared
 cloudflared tunnel --url http://localhost:3000
 nest runna sulla porta 3000
+
+oppure usare ngrok col comando
+http ngrok 3000
